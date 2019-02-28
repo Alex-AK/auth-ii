@@ -4,8 +4,8 @@ import Loader from 'react-loader-spinner';
 
 const Register = props => {
   return (
-    <LoginPageStyles>
-      <form onSubmit={props.loginUser}>
+    <RegisterPageStyles>
+      <form onSubmit={props.handleRegister}>
         <input
           placeholder="Username"
           onChange={props.handleChange}
@@ -34,13 +34,13 @@ const Register = props => {
         </button>
         <br />
       </form>
-    </LoginPageStyles>
+    </RegisterPageStyles>
   );
 };
 
 export default Register;
 
-const LoginPageStyles = styled.div`
+const RegisterPageStyles = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

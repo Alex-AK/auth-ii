@@ -15,6 +15,23 @@ class LoginView extends Component {
     }
   };
 
+  handleRegister = e => {
+    e.preventDefault();
+    axios
+      .post('/register', this.state.user)
+      .then(res => {
+        localStorage.setItem('token', res.data.token);
+        this.props.history.push('/');
+      })
+      .catch(error => console.error(error));
+    this.setState({
+      user: {
+        username: '',
+        password: ''
+      }
+    });
+  };
+
   handleLogin = e => {
     e.preventDefault();
     axios
@@ -63,6 +80,7 @@ class LoginView extends Component {
               username={username}
               password={password}
               handleChange={this.handleChange}
+              handleRegister={this.handleRegister}
             />
           )}
         />
