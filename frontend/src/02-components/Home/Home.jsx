@@ -3,6 +3,8 @@ import React from 'react';
 import styled from 'styled-components';
 import User from '../Users/User';
 
+import Authentication from '../Auth/Authentication';
+
 const Home = props => {
   const mappedUsers = props.users.map(user => <User key={'user'} />);
   return (
@@ -15,7 +17,7 @@ const Home = props => {
   );
 };
 
-export default Home;
+export default Authentication(Home);
 
 const HomeStyles = styled.div`
   display: flex;
