@@ -6,6 +6,7 @@ const Login = props => {
     <LoginPageStyles>
       <form onSubmit={props.handleLogin}>
         <input
+          autoComplete="username"
           placeholder="Username"
           onChange={props.handleChange}
           name="username"
@@ -15,6 +16,7 @@ const Login = props => {
           maxLength="24"
         />
         <input
+          autoComplete="current-password"
           placeholder="Password"
           onChange={props.handleChange}
           name="password"
@@ -25,7 +27,6 @@ const Login = props => {
           maxLength="24"
         />
         <button>Login</button>
-        <br />
       </form>
     </LoginPageStyles>
   );

@@ -4,8 +4,6 @@ import { Route, withRouter } from 'react-router';
 import Login from '../02-components/Login/Login';
 import Register from '../02-components/Login/Register';
 
-axios.defaults.baseURL = 'http://localhost:4000/api';
-
 class LoginView extends Component {
   state = {
     isNewUser: false,

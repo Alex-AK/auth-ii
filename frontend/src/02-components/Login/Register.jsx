@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Loader from 'react-loader-spinner';
 
 const Register = props => {
   return (
@@ -25,14 +24,7 @@ const Register = props => {
           type="password"
           maxLength="24"
         />
-        <button onClick={props.error === 'fail' ? props.displayError : null}>
-          {props.isLoading ? (
-            <Loader type="TailSpin" color="white" height={18} width={18} />
-          ) : (
-            'Register'
-          )}
-        </button>
-        <br />
+        <button>Register</button>
       </form>
     </RegisterPageStyles>
   );
