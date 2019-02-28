@@ -1,11 +1,11 @@
 import React from 'react';
 
-const users = () => {
+const User = props => {
   return (
     <>
-      <p>testing</p>
+      <p>{props.username}</p>
     </>
   );
 };
 
-export default users;
+export default User;

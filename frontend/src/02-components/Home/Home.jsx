@@ -1,22 +1,38 @@
 // package imports
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import User from '../Users/User';
+import axios from 'axios';
 
 import Authentication from '../Auth/Authentication';
 
-const Home = props => {
-  const mappedUsers = props.users.map(user => <User key={'user'} />);
-  return (
-    <>
-      <HomeStyles>
-        <h1>List of Users</h1>
-        {mappedUsers}
-      </HomeStyles>
-    </>
-  );
-};
+const token = localStorage.getItem('token');
+class Home extends Component {
+  state = {
+    users: []
+  };
 
+  componentDidMount() {
+    axios
+      .get('/users', { headers: { Authorization: token } })
+      .then(res => this.setState({ users: res.data }))
+      .catch(err => console.log(err));
+  }
+  render() {
+    const mappedUsers = this.state.users.map(user => (
+      <User key={user.id} id={user.id} username={user.username} />
+    ));
+
+    return (
+      <>
+        <HomeStyles>
+          <h1>List of Users</h1>
+          {mappedUsers}
+        </HomeStyles>
+      </>
+    );
+  }
+}
 export default Authentication(Home);
 
 const HomeStyles = styled.div`
