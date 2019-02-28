@@ -1,32 +1,35 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import { Route, withRouter } from 'react-router';
+import Login from '../02-components/Login/Login';
+import Register from '../02-components/Login/Register';
 
-import Login from '../components/Login/Login';
-import Register from '../components/Login/Register';
-import { connect } from 'react-redux';
-import { registerUser, loginUser } from '../store/actions/user';
-import styled from 'styled-components';
+axios.defaults.baseURL = 'http://localhost:4000/api';
 
 class LoginView extends Component {
   state = {
-    username: '',
-    password: ''
+    isNewUser: false,
+    user: {
+      username: '',
+      password: ''
+    }
   };
 
-  componentDidMount() {
-    // get data here
-  }
-
-  registerUser = e => {
+  handleLogin = e => {
     e.preventDefault();
-    this.props.registerUser(this.state.user);
+    axios
+      .post('/login', this.state.user)
+      .then(res => {
+        localStorage.setItem('token', res.data.token);
+        this.props.history.push('/');
+      })
+      .catch(error => console.error(error));
     this.setState({
-      isNewUser: false
+      user: {
+        username: '',
+        password: ''
+      }
     });
-  };
-
-  loginUser = e => {
-    e.preventDefault();
-    this.props.loginUser(this.state.user);
   };
 
   handleChange = e => {
@@ -38,63 +41,34 @@ class LoginView extends Component {
   };
 
   render() {
-    return this.state.isNewUser ? (
-      <Register
-        handleChange={this.handleChange}
-        switchView={this.switchView}
-        registerUser={this.registerUser}
-      />
-    ) : this.props.error === 'fail' ? (
-      <>
-        <ErrorContainer>
-          <ErrorMessage>Login Failed, invalid Username</ErrorMessage>
-        </ErrorContainer>
+    let { username, password } = this.state.user;
 
-        <Login
-          switchView={this.switchView}
-          loginUser={this.loginUser}
-          handleChange={this.handleChange}
-          isLoading={this.props.isLoading}
-          displayError={this.displayError}
-          error={this.state.error}
-          displaySuccess={this.displaySuccess}
-        />
-      </>
-    ) : (
+    return (
       <>
-        <Login
-          switchView={this.switchView}
-          loginUser={this.loginUser}
-          handleChange={this.handleChange}
-          isLoading={this.props.isLoading}
-          displayError={this.displayError}
-          error={this.state.error}
-          displaySuccess={this.displaySuccess}
+        <Route
+          path="/login"
+          render={props => (
+            <Login
+              username={username}
+              password={password}
+              handleChange={this.handleChange}
+              handleLogin={this.handleLogin}
+            />
+          )}
+        />
+        <Route
+          path="/register"
+          render={props => (
+            <Register
+              username={username}
+              password={password}
+              handleChange={this.handleChange}
+            />
+          )}
         />
       </>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    isLoading: state.user.isLoading,
-    error: state.user.error
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  { registerUser, loginUser }
-)(LoginView);
-
-const ErrorContainer = styled.div`
-  position: absolute;
-  z-index: 10;
-  display: inline-block;
-  text-align: center;
-  width: 100%;
-  background-color: red;
-  color: white;
-`;
-const ErrorMessage = styled.p``;
+export default withRouter(LoginView);

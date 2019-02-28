@@ -5,17 +5,19 @@ import React, { Component } from 'react';
 import { Route } from 'react-router';
 import NavigationView from './NavigationView';
 import Home from '../02-components/Home/Home';
-import Login from '../02-components/Login/Login';
-import Register from '../02-components/Login/Register';
+import LoginView from './LoginView';
 
 export class HomeView extends Component {
+  handleLogout = () => {
+    localStorage.clear('token');
+  };
+
   render() {
     return (
       <>
-        <NavigationView />
+        <NavigationView handleLogout={this.handleLogout} />
         <Route exact path="/" render={props => <Home />} />
-        <Route path="/login" render={props => <Login />} />
-        <Route path="/register" render={props => <Register />} />
+        <LoginView />
       </>
     );
   }

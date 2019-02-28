@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import Loader from 'react-loader-spinner';
 
 const Login = props => {
   return (
     <LoginPageStyles>
-      <form onSubmit={props.loginUser}>
+      <form onSubmit={props.handleLogin}>
         <input
           placeholder="Username"
           onChange={props.handleChange}
@@ -25,13 +24,7 @@ const Login = props => {
           type="password"
           maxLength="24"
         />
-        <button onClick={props.error === 'fail' ? props.displayError : null}>
-          {props.isLoading ? (
-            <Loader type="TailSpin" color="white" height={18} width={18} />
-          ) : (
-            'Login'
-          )}
-        </button>
+        <button>Login</button>
         <br />
       </form>
     </LoginPageStyles>

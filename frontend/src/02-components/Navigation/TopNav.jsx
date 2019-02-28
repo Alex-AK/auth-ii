@@ -3,9 +3,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 // component imports
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
-const TopNav = () => {
+const TopNav = props => {
   return (
     <Top>
       <h1>Auth Demo</h1>
@@ -16,6 +16,9 @@ const TopNav = () => {
         <NavLink exact to="/register">
           <h5>register</h5>
         </NavLink>
+        <Link to="/login" onClick={props.handleLogout}>
+          <h5>logout</h5>
+        </Link>
       </div>
     </Top>
   );
@@ -29,6 +32,26 @@ const Top = styled.div`
   align-items: center;
   height: 80px;
 
+  a {
+    font-size: 1rem;
+    text-decoration: none;
+    border: 1px solid grey;
+    border-radius: 3px;
+    padding: 10px 20px;
+    background: white;
+    color: black;
+    margin: 0 10px;
+
+    &:hover {
+      background: teal;
+      color: white;
+    }
+  }
+
+  .active {
+    color: teal;
+  }
+
   h1 {
     font-size: 2rem;
     margin-left: 20px;
@@ -36,9 +59,6 @@ const Top = styled.div`
 
   div {
     display: flex;
-
-    h5 {
-      margin: 0 10px;
-    }
+    margin-right: 20px;
   }
 `;
