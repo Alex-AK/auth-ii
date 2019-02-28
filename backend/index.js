@@ -1,5 +1,7 @@
+// env access
 require('dotenv').config();
 
+// package imports
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
