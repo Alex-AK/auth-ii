@@ -1,78 +1,39 @@
 import React from 'react';
 import styled from 'styled-components';
-import TextField from '@material-ui/core/TextField';
 import Loader from 'react-loader-spinner';
-import { Link } from 'react-router-dom';
 
 const Register = props => {
   return (
     <LoginPageStyles>
-      <LoginMenuStyles autoComplete="false" onSubmit={props.registerUser}>
-        <TextField
-          minLength="4"
-          maxLength="24"
-          fullWidth
-          label="Full Name"
-          onChange={props.handleChange}
-          name="fullname"
-          type="text"
-          value={props.currentName}
-          inputProps={{ minLength: 4, maxLength: 30 }}
-          required
-        />
-        <TextField
-          minLength="6"
-          maxLength="24"
-          fullWidth
-          label="Email"
-          onChange={props.handleChange}
-          name="email"
-          value={props.currentUsername}
-          inputProps={{ minLength: 4, maxLength: 30 }}
-          required
-        />
-        <TextField
-          minLength="6"
-          maxLength="24"
-          fullWidth
-          label="Username"
+      <form onSubmit={props.loginUser}>
+        <input
+          placeholder="Username"
           onChange={props.handleChange}
           name="username"
-          value={props.currentUsername}
-          inputProps={{ minLength: 4, maxLength: 30 }}
+          value={props.username}
           required
-        />
-        <TextField
           minLength="4"
           maxLength="24"
-          fullWidth
-          label="Password"
+        />
+        <input
+          placeholder="Password"
           onChange={props.handleChange}
           name="password"
-          value={props.currentPassword}
-          inputProps={{ minLength: 6, maxLength: 30 }}
+          value={props.password}
           required
+          minLength="6"
           type="password"
+          maxLength="24"
         />
-
-        <LoginButton type="submit">
+        <button onClick={props.error === 'fail' ? props.displayError : null}>
           {props.isLoading ? (
             <Loader type="TailSpin" color="white" height={18} width={18} />
           ) : (
-            'Create Account'
+            'Register'
           )}
-        </LoginButton>
-        <LoginPageText>
-          By signing up, you agree to our Terms, Data Policy.
-        </LoginPageText>
-      </LoginMenuStyles>
-      <SwitchMenuStyles>
-        <div>
-          <Link to="/login">
-            <p>Go Back</p>
-          </Link>
-        </div>
-      </SwitchMenuStyles>
+        </button>
+        <br />
+      </form>
     </LoginPageStyles>
   );
 };
@@ -85,73 +46,44 @@ const LoginPageStyles = styled.div`
   align-items: center;
   flex-direction: column;
   height: 100vh;
-`;
 
-const LoginMenuStyles = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #e6e6e6;
-  border-radius: 2px;
-  width: 340px;
-  background: #ffffff;
-  padding: 40px 40px 0 40px;
-
-  label {
-    font-size: 1.3rem;
-  }
-`;
-
-const LoginButton = styled.button`
-  width: 272px;
-  height: 40px;
-  border-radius: 4px;
-  padding: 0 10px;
-  margin-top: 15px;
-  color: white;
-  font-weight: 700;
-  font-size: 14px;
-  background: #4e6d79;
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-const LoginPageText = styled.h2`
-  font-size: 12px;
-  font-weight: 700;
-  color: #9a9a9a;
-  margin: 15px 0;
-  padding: 0 10px;
-  text-align: center;
-  line-height: 1.5;
-`;
-
-const SwitchMenuStyles = styled.form`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #e6e6e6;
-  border-radius: 2px;
-  width: 340px;
-  background: #ffffff;
-  padding: 20px 0;
-  margin-top: 15px;
-
-  div {
-    cursor: pointer;
-    width: 60%;
-    justify-content: center;
-    align-items: center;
+  form {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e6e6e6;
+    border-radius: 2px;
+    width: 340px;
+    background: #ffffff;
+    padding: 50px 10px 20px 10px;
 
-    p {
-      font-size: 1.2rem;
-      font-weight: 600;
-      padding: 0;
-      margin: 0;
+    input {
+      border: 1px solid #efefef;
+      border-radius: 3px;
+      margin-bottom: 7px;
+      padding: 10px 0 10px 7px;
+      width: 270px;
+      background: #fafafa;
+
+      &:focus {
+        outline: none;
+      }
+    }
+    button {
+      width: 278px;
+      height: 40px;
+      border-radius: 4px;
+      padding: 0 10px;
+      margin: 10px 0;
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+      background: #4e6d79;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 `;

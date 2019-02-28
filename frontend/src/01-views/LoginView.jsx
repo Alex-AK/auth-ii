@@ -8,25 +8,13 @@ import styled from 'styled-components';
 
 class LoginView extends Component {
   state = {
-    isNewUser: false,
-    user: {
-      name: '',
-      email: '',
-      username: '',
-      password: ''
-    },
-    error: ''
+    username: '',
+    password: ''
   };
-  componentDidMount() {
-    this.setState({ error: this.props.error });
-  }
 
-  switchView = e => {
-    e.preventDefault();
-    this.setState(prevState => ({
-      isNewUser: !prevState.isNewUser
-    }));
-  };
+  componentDidMount() {
+    // get data here
+  }
 
   registerUser = e => {
     e.preventDefault();
