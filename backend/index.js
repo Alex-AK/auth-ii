@@ -17,7 +17,13 @@ const server = express();
 server.use(express.json());
 server.use(helmet());
 server.use(morgan('dev'));
-server.use(cors());
+
+const corsConfig = {
+  credentials: true,
+  origin: true
+};
+
+server.use(cors(corsConfig));
 
 function generateToken(user) {
   const payload = {

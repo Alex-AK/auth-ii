@@ -5,8 +5,6 @@ import User from '../Users/User';
 import axios from 'axios';
 
 import Authentication from '../Auth/Authentication';
-
-const token = localStorage.getItem('token');
 class Home extends Component {
   state = {
     users: []
@@ -14,7 +12,7 @@ class Home extends Component {
 
   componentDidMount() {
     axios
-      .get('/users', { headers: { Authorization: token } })
+      .get('/users', { headers: { Authorization: this.props.token } })
       .then(res => this.setState({ users: res.data }))
       .catch(err => console.log(err));
   }

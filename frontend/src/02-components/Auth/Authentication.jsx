@@ -9,7 +9,9 @@ const Authentication = Component => {
         <Unauthorized>Please login to see users.</Unauthorized>
       );
 
-      return <>{token ? <Component {...this.props} /> : notLoggedIn}</>;
+      return (
+        <>{token ? <Component {...this.props} token={token} /> : notLoggedIn}</>
+      );
     }
   };
 };
